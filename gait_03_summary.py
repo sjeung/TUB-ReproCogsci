@@ -18,6 +18,7 @@ group_stride_averages = {
 for group in participant_groups:
     for pi in range(1, max_n_participant + 1):  # goes up to 33, the max nr of participants in a group
 
+
         # Initialize participant stride list
         participant_stride_times = []
 
@@ -38,16 +39,19 @@ for group in participant_groups:
 
         participant_stride_times.append(data)
 
-        # Stack stride times and compute mean across all reps
-        all_strides = np.vstack(participant_stride_times)
-        all_strides[all_strides == 0] = np.nan # because there are some zero values mixed in
-        left_mean = np.nanmean(all_strides[:, 0])
-        right_mean = np.nanmean(all_strides[:, 1])
-        group_stride_averages[group].append([left_mean, right_mean])
+
+        if participant_stride_times:
+            # Stack stride times and compute mean across all reps
+            all_strides = np.vstack(participant_stride_times)
+            left_mean = np.nanmean(all_strides[:, 0])
+            right_mean = np.nanmean(all_strides[:, 1])
+            group_stride_averages[group].append([left_mean, right_mean])
+
 
 # Convert lists to arrays
 group_stride_averages["Co"] = np.array(group_stride_averages["Co"])
 group_stride_averages["Pt"] = np.array(group_stride_averages["Pt"])
+
 
 # Print summary
 print("Control Group Stride Means (per participant):")
@@ -104,3 +108,4 @@ ax.legend(by_label.values(), by_label.keys(), loc='upper right', bbox_to_anchor=
 
 plt.tight_layout()
 plt.show()
+

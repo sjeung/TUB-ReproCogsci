@@ -3,8 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Definitions
-data_folder = "P:/Sein_Jeung/Teaching/ReproResearch/Data"
-figure_folder = "P:/Sein_Jeung/Teaching/ReproResearch/Figures"
+data_folder = "/Users/yeriming/Downloads/ReproResearch/Data"
+figure_folder = "/Users/yeriming/Downloads/ReproResearch/Figures"
+
 subset_name = "Ga"  # enter one of the following : Ju, Si, Ga
 participant_groups = "Co", "Pt"  # Co for controls, Pt for patients
 max_n_participant = 33  # maximal number of participants per group
@@ -39,11 +40,15 @@ for group in participant_groups:
                 plt.ylabel('Force (N)')
                 plt.legend()
                 plt.title('Total Vertical Ground Reaction Force')
-                # plt.show()
+
 
                 # save the figure
                 figure_filename = figure_folder + '/01_raw-data/' + 'raw_' + participant_ID + '_' + rep + '.png'
-                os.makedirs(figure_folder + '/01_raw-data/', exist_ok=True)
+                os.makedirs(figure_folder + '/01_raw-data/', exist_ok=True)  # when saving anything, the target folder needs to exist first
+
+                # plt.show()
+
+      
                 plt.savefig(figure_filename)
                 plt.close()
 
